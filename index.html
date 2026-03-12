@@ -6,267 +6,386 @@
     <title>Dojo Insider | Tecnologia para Gestão de Artes Marciais</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <link rel="icon" type="image/png" href="dojo_icon.png">
+
     <style>
-        /* --- ESTILOS INSPIRADOS NO IDOJO --- */
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: #ffffff; /* Fundo Branco Principal */
+            background-color: #ffffff;
             color: #333333;
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: #2c3e50;
-        }
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #1e293b; }
 
-        /* --- NAVBAR (Escura igual iDojo) --- */
+        /* =========================================
+           NAVBAR (MANTENDO O ESTILO ANTERIOR COM FONT AWESOME)
+           ========================================= */
         .navbar-custom {
-            background-color: #212529; /* Cinza Quase Preto */
-            color: white;
-            padding: 15px 20px;
+            background-color: #0f172a; /* Azul Escuro/Slate */
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .navbar-brand {
             font-weight: 900;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             text-decoration: none;
-            color: white !important;
+            color: white;
             display: flex;
             align-items: center;
+            letter-spacing: 1px;
         }
 
-        .port-btn-nav {
-            background-color: #e74c3c; /* Vermelho para destaque */
-            color: white !important;
-            padding: 8px 18px;
-            border-radius: 4px;
-            text-decoration: none;
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #cbd5e1;
             font-weight: 600;
             font-size: 0.9rem;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: 'Open Sans', sans-serif;
+            transition: 0.2s;
         }
 
-        /* --- HERO SECTION (Banner Verde igual iDojo) --- */
+        .nav-btn.active, .nav-btn:hover {
+            background-color: #1e293b;
+            color: white;
+        }
+
+        .btn-cta-nav {
+            background-color: #e63946; /* Vermelho Carmesim */
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            transition: 0.2s;
+            margin-left: 15px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-cta-nav:hover { background-color: #d32f2f; color: white; transform: translateY(-2px); }
+
+        /* =========================================
+           SISTEMA DE PÁGINAS (TABS)
+           ========================================= */
+        .page-view {
+            display: none;
+            animation: fadeIn 0.4s;
+        }
+        .page-view.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HERO E SEÇÕES COMUNS --- */
         .port-hero {
             padding: 100px 20px;
-            /* Degradê verde característico */
-            background: linear-gradient(135deg, #115934 0%, #1a8a51 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: white;
             text-align: center;
         }
+        .port-hero h1 { font-size: 3rem; max-width: 900px; margin: 0 auto 20px; color: white; }
+        .port-hero p { font-size: 1.2rem; color: #94a3b8; max-width: 700px; margin: 0 auto 40px; }
+        
+        .section-padding { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.3rem; margin-bottom: 60px; text-transform: uppercase; color: #0f172a; }
 
-        .port-hero h1 { font-size: 3rem; line-height: 1.2; max-width: 900px; margin: 0 auto 20px; color: white; }
-        .port-hero p { font-size: 1.2rem; color: #e0e0e0; max-width: 700px; margin: 0 auto 40px; font-weight: 400; }
-
-        .port-btn-light {
-            background-color: #ffffff;
-            color: #115934 !important;
-            padding: 15px 35px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: 4px;
-            text-decoration: none;
-            display: inline-block;
-            transition: 0.3s;
-            border: none;
-        }
-        .port-btn-light:hover { background-color: #f1f1f1; transform: translateY(-3px); }
-
-        /* --- SEÇÕES NO FUNDO BRANCO --- */
-        .port-section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
-        .port-section-title { text-align: center; font-size: 2.3rem; margin-bottom: 60px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Case de Sucesso (Clean) */
-        .case-study {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 40px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .case-text { flex: 1; min-width: 300px; }
-        .case-text h3 { color: #1a8a51; font-size: 1.5rem; margin-bottom: 15px; }
-        .case-text p { color: #666; margin-bottom: 20px; }
-        .case-text ul { list-style: none; padding: 0; }
-        .case-text ul li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; color: #444; font-size: 0.95rem; }
-        .case-text ul li::before { content: '✓'; color: #2ecc71; font-weight: bold; }
-
-        .case-image {
-            flex: 1;
-            min-width: 300px;
-            background-color: #e9ecef;
-            border-radius: 8px;
-            height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-weight: bold;
-            border: 2px dashed #ccc;
-            overflow: hidden;
-        }
-        .case-image img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* Vantagens (Estilo Ícones iDojo) */
-        .grid-vantagens {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .card-vantagem {
+        /* --- ESTILOS DE COMPONENTES --- */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        /* Cards de Funcionalidades */
+        .card-func {
             background-color: #fff;
-            padding: 30px;
+            padding: 40px 30px;
             border-radius: 8px;
             text-align: center;
-            border: 1px solid #eee;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
             transition: 0.3s;
         }
-        .card-vantagem:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .card-func:hover { border-color: #e63946; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transform: translateY(-5px); }
         
         .icone-wrap {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px auto;
-            font-size: 2rem;
-            color: white;
+            width: 80px; height: 80px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px auto; font-size: 2rem; color: white;
         }
-        /* Cores dos ícones inspiradas no iDojo */
-        .v-blue { background-color: #3498db; }
-        .v-green { background-color: #2ecc71; }
-        .v-orange { background-color: #e67e22; }
+        /* Novas Cores de Ícones */
+        .bg-blue { background-color: #3b82f6; }
+        .bg-red { background-color: #e63946; }
+        .bg-dark { background-color: #334155; }
 
-        .card-vantagem h3 { font-size: 1.2rem; margin-bottom: 10px; }
-        .card-vantagem p { color: #777; font-size: 0.9rem; }
-
-        /* --- CTA (Banner Escuro igual iDojo) --- */
-        .cta-box {
-            background-color: #2c3e50;
-            padding: 60px 20px;
-            color: white;
+        /* Cards de Preços */
+        .pricing-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
             text-align: center;
-            border-top: 5px solid #1a8a51;
-        }
-        .cta-box h2 { color: #fff; margin-bottom: 20px; }
-        .port-btn-green {
-            background-color: #2ecc71;
-            color: white !important;
-            padding: 15px 35px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: 4px;
-            text-decoration: none;
-            display: inline-block;
-            transition: 0.3s;
-        }
-        .port-btn-green:hover { background-color: #27ae60; }
-
-        /* --- FOOTER (Escuro) --- */
-        footer {
-            background-color: #212529;
-            color: #888;
             padding: 40px 20px;
-            text-align: center;
-            font-size: 0.85rem;
+            background: white;
+        }
+        .pricing-card h3 { color: #0f172a; margin-bottom: 10px; }
+        .pricing-card .price { font-size: 3rem; font-weight: 900; color: #e63946; margin: 20px 0; }
+        .pricing-card ul { list-style: none; margin-bottom: 30px; text-align: left; display: inline-block; }
+        .pricing-card ul li { margin-bottom: 10px; color: #475569; display: flex; align-items: center; }
+        .pricing-card ul li i { color: #10b981; margin-right: 10px; }
+        
+        .btn-pricing {
+            display: inline-block; background-color: #0f172a; color: white;
+            padding: 12px 30px; border-radius: 4px; text-decoration: none; font-weight: bold; transition: 0.2s;
+        }
+        .btn-pricing:hover { background-color: #e63946; }
+
+        /* Contato */
+        .contact-box { background-color: #f8fafc; padding: 50px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0; }
+
+        footer { background-color: #090a0f; color: #64748b; padding: 40px 20px; text-align: center; font-size: 0.85rem; margin-top: 50px; }
+
+        /* Imagens */
+        .img-featured {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #fff;
+        }
+
+        /* Responsividade Menu */
+        @media (max-width: 768px) {
+            .navbar-custom { flex-direction: column; gap: 15px; padding: 15px; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; }
+            .btn-cta-nav { margin-left: 0; margin-top: 10px; }
         }
     </style>
 </head>
 <body>
 
     <nav class="navbar-custom">
-        <a href="#" class="navbar-brand">
-            <i class="fas fa-torii-gate me-2" style="color: #2ecc71; margin-right: 10px;"></i> DOJO INSIDER
+        <a href="#" class="navbar-brand" onclick="mudarPagina('inicio')">
+            <i class="fas fa-torii-gate me-2" style="color: #e63946; margin-right: 10px;"></i> DOJO INSIDER
         </a>
-        <a href="#contato" class="port-btn-nav">Agendar Demo</a>
+        
+        <div class="nav-menu">
+            <button class="nav-btn active" id="tab-inicio" onclick="mudarPagina('inicio')">Início</button>
+            <button class="nav-btn" id="tab-funcionalidades" onclick="mudarPagina('funcionalidades')">Funcionalidades</button>
+            <button class="nav-btn" id="tab-precos" onclick="mudarPagina('precos')">Preços</button>
+            <button class="nav-btn" id="tab-contato" onclick="mudarPagina('contato')">Contato</button>
+            
+            <button onclick="mudarPagina('contato')" class="btn-cta-nav">Agendar Demo</button>
+        </div>
     </nav>
 
-    <header class="port-hero">
-        <h1>Organize sua Federação com Tecnologia de Ponta</h1>
-        <p>A Dojo Insider fornece sistemas institucionais robustos para Federações e Dojos. Automatize cobranças, mensalidades e eventos esportivos.</p>
-        <a href="#contato" class="port-btn-light">Conheça Nossas Soluções</a>
-    </header>
+    <div id="page-inicio" class="page-view active">
+        <header class="port-hero">
+            <h1>A Plataforma Definitiva para Gestão de Artes Marciais</h1>
+            <p>Especialistas em softwares de alto desempenho para Federações e Dojos. Automatize mensalidades, competições e exames de faixa.</p>
+            <button class="btn-cta-nav" style="margin:0; font-size: 1.1rem; padding: 15px 35px;" onclick="mudarPagina('funcionalidades')">Ver Funcionalidades</button>
+        </header>
 
-    <section class="port-section">
-        <h2 class="port-section-title">Nossa Tecnologia em Campo</h2>
-        
-        <div class="case-study">
-            <div class="case-text">
-                <h3>Plataforma ERP para Federações Marciais</h3>
-                <p>Mapeamos e automatizamos as regras de negócio complexas que softwares genéricos não conseguem resolver.</p>
-                <ul>
-                    <li><strong>Financeiro Integrado (Asaas):</strong> Emissão automática de Pix/Boletos para Anuidades e Taxas, com baixa bancária sistêmica sem intervenção humana.</li>
-                    <li><strong>Gestão de Eventos e Chaves:</strong> Organização de competições com geração automática de chaves baseadas em peso, idade e graduação (faixa).</li>
-                    <li><strong>Hierarquia e Filiais:</strong> Painel central para Federação supervisionar Associações eDoJos filiados, e controle individual de atletas.</li>
-                </ul>
+        <section class="section-padding">
+            <div style="background-color: #f8fafc; border-radius: 8px; padding: 40px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; border: 1px solid #e2e8f0;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h3 style="color: #0f172a; font-size: 1.8rem; margin-bottom: 15px;">Sistema ERP Exclusivo para o Tatame</h3>
+                    <p style="color: #475569; margin-bottom: 20px; font-size: 1.1rem;">Nós mapeamos e automatizamos as regras complexas do seu esporte que os softwares de academia genéricos não conseguem resolver.</p>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 15px; color: #334155; font-weight: 600;"><i class="fas fa-check-circle" style="color: #e63946; margin-right: 10px; font-size: 1.2rem;"></i> Integração Financeira via Asaas (Baixa automática)</li>
+                        <li style="margin-bottom: 15px; color: #334155; font-weight: 600;"><i class="fas fa-check-circle" style="color: #e63946; margin-right: 10px; font-size: 1.2rem;"></i> Geração de chaves automáticas por peso e idade</li>
+                        <li style="margin-bottom: 15px; color: #334155; font-weight: 600;"><i class="fas fa-check-circle" style="color: #e63946; margin-right: 10px; font-size: 1.2rem;"></i> Controle de hierarquia (Matriz > Filiais > Atletas)</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Dashboard de Gestão" class="img-featured">
+                </div>
             </div>
-            <div class="case-image">
-                <span>[ Print do Sistema Corporativo ]</span>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="port-section">
-        <h2 class="port-section-title">Forjado para o Tatame</h2>
-        <div class="grid-vantagens">
-            <div class="card-vantagem">
-                <div class="icone-wrap v-blue"><i class="fas fa-handshake"></i></div>
-                <h3>Regras do Esporte</h3>
-                <p>Softwares comuns não entendem de "Kyu/Dan" ou "Cochonilha". Nós desenvolvemos a regra de negócio exata para artes marciais.</p>
+        <section style="background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; background-attachment: fixed; padding: 100px 20px; text-align: center; color: white;">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h2 style="color: white; font-size: 2.5rem; margin-bottom: 20px;">Foque no ensino. Nós cuidamos do resto.</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 30px; color: #cbd5e1;">A tecnologia deve ser uma aliada do mestre, não uma dor de headache. Reduza a inadimplência e o trabalho administrativo em até 80%.</p>
+                <button onclick="mudarPagina('contato')" class="btn-cta-nav" style="margin: 0; padding: 12px 30px;">Falar com Especialista</button>
             </div>
-            <div class="card-vantagem">
-                <div class="icone-wrap v-green"><i class="fas fa-chart-line"></i></div>
-                <h3>Fim da Inadimplência</h3>
-                <p>Cobranças automáticas via API impedem a inscrição de atletas irregulares em competições e exames de faixa.</p>
-            </div>
-            <div class="card-vantagem">
-                <div class="icone-wrap v-orange"><i class="fas fa-rocket"></i></div>
-                <h3>White-Label Institucional</h3>
-                <p>Sua Federação com tecnologia própria. Customizamos a plataforma para rodar 100% sob a sua marca e identidade.</p>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <section class="cta-box" id="contato">
-        <div class="container">
-            <h2>Vamos modernizar sua Federação?</h2>
-            <p style="max-width: 600px; margin: 0 auto 30px; color: #ccc;">
-                Agende uma demonstração gratuita e veja como a Dojo Insider pode eliminar o trabalho braçal administrativo da sua organização marcial.
-            </p>
-            <a href="https://wa.me/5511999999999" target="_blank" class="port-btn-green">
-                <i class="fab fa-whatsapp me-2"></i> Chamar no WhatsApp
-            </a>
-            <p style="margin-top: 20px; font-size: 0.9rem; color: #888;">Ou contato@dojoinsider.com.br</p>
-        </div>
-    </section>
+    <div id="page-funcionalidades" class="page-view">
+        <header class="port-hero" style="padding: 60px 20px;">
+            <h1>Funcionalidades Exclusivas</h1>
+            <p>Conheça as ferramentas que vão transformar o dia a dia da sua Federação e Dojos afiliados.</p>
+        </header>
+
+        <section class="section-padding">
+            <div class="grid-3">
+                <div class="card-func">
+                    <div class="icone-wrap bg-blue"><i class="fas fa-users"></i></div>
+                    <h3>Gestão de Atletas</h3>
+                    <p>Controle absoluto de turmas, peso, faixa, idade e histórico completo de participação em eventos de cada aluno filiado.</p>
+                </div>
+                <div class="card-func">
+                    <div class="icone-wrap bg-red"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3>Financeiro Automático</h3>
+                    <p>Fim da inadimplência. Geração de cobranças via PIX ou Boleto com bloqueio de eventos para atletas com taxas irregulares.</p>
+                </div>
+                <div class="card-func">
+                    <div class="icone-wrap bg-dark"><i class="fas fa-trophy"></i></div>
+                    <h3>Competições Inteligentes</h3>
+                    <p>Crie eventos em minutos. As associações inscrevem seus alunos e o sistema gera as chaves de luta de forma automatizada.</p>
+                </div>
+                <div class="card-func">
+                    <div class="icone-wrap bg-dark"><i class="fas fa-certificate"></i></div>
+                    <h3>Exames de Faixa</h3>
+                    <p>Controle o tempo de carência de cada graduação e aprove os exames apenas para quem cumpriu os requisitos da entidade.</p>
+                </div>
+                <div class="card-func">
+                    <div class="icone-wrap bg-blue"><i class="fas fa-sitemap"></i></div>
+                    <h3>Hierarquia White-Label</h3>
+                    <p>A Federação possui um painel master onde supervisiona todas as associações do estado com sua própria logomarca e identidade.</p>
+                </div>
+                <div class="card-func">
+                    <div class="icone-wrap bg-red"><i class="fas fa-file-excel"></i></div>
+                    <h3>Exportação Dinâmica</h3>
+                    <p>Extraia listas de competidores, pagamentos confirmados e ficha de alunos diretamente para planilhas organizadas no Excel.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="page-precos" class="page-view">
+        <header class="port-hero" style="padding: 60px 20px;">
+            <h1>Modelos de Contratação</h1>
+            <p>Planos flexíveis que se adaptam ao tamanho da sua instituição.</p>
+        </header>
+
+        <section class="section-padding">
+            <div class="grid-3">
+                
+                <div class="pricing-card">
+                    <h3>Iniciante</h3>
+                    <p style="color: #64748b;">Para Associações em crescimento</p>
+                    <div class="price">R$ 149<span style="font-size: 1rem; color: #94a3b8;">/mês</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Até 50 atletas ativos</li>
+                        <li><i class="fas fa-check"></i> Módulo de Exames de Faixa</li>
+                        <li><i class="fas fa-check"></i> Faturamento Manual</li>
+                        <li><i class="fas fa-check"></i> Suporte por E-mail</li>
+                    </ul>
+                    <a href="#contato" onclick="mudarPagina('contato')" class="btn-pricing" style="background-color: #334155; width: 100%;">Assinar Plano</a>
+                </div>
+
+                <div class="pricing-card" style="border: 2px solid #e63946; transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                    <div style="background-color: #e63946; color: white; padding: 6px; font-weight: bold; margin: -40px -20px 20px -20px; border-radius: 6px 6px 0 0; font-size: 0.85rem;">MAIS POPULAR</div>
+                    <h3>Profissional</h3>
+                    <p style="color: #64748b;">Automação total para grandes Dojos</p>
+                    <div class="price">R$ 249<span style="font-size: 1rem; color: #94a3b8;">/mês</span></div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> <strong>Até 150 atletas ativos</strong></li>
+                        <li><i class="fas fa-check"></i> Integração PIX/Boleto Asaas</li>
+                        <li><i class="fas fa-check"></i> Módulo de Competições</li>
+                        <li><i class="fas fa-check"></i> Suporte via WhatsApp</li>
+                    </ul>
+                    <a href="#contato" onclick="mudarPagina('contato')" class="btn-cta-nav" style="margin: 0; width: 100%; display: block; padding: 12px;">Assinar Plano</a>
+                </div>
+
+                <div class="pricing-card" style="background-color: #0f172a; border-color: #0f172a;">
+                    <h3 style="color: white;">Federação Master</h3>
+                    <p style="color: #94a3b8;">Para entidades regionais/estaduais</p>
+                    <div class="price" style="font-size: 2rem; color: #fff;">Personalizado</div>
+                    <ul>
+                        <li style="color: #cbd5e1;"><i class="fas fa-check"></i> Associações Filiais Ilimitadas</li>
+                        <li style="color: #cbd5e1;"><i class="fas fa-check"></i> Atletas Ilimitados</li>
+                        <li style="color: #cbd5e1;"><i class="fas fa-check"></i> Painel White-Label (Sua Marca)</li>
+                        <li style="color: #cbd5e1;"><i class="fas fa-check"></i> Hospedagem Dedicada</li>
+                    </ul>
+                    <a href="#contato" onclick="mudarPagina('contato')" class="btn-pricing" style="background-color: #3b82f6; width: 100%;">Falar com Consultor</a>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <div id="page-contato" class="page-view">
+        <header class="port-hero" style="padding: 60px 20px;">
+            <h1>Fale com um Especialista</h1>
+            <p>Tire suas dúvidas técnicas ou agende uma demonstração gratuita do sistema.</p>
+        </header>
+
+        <section class="section-padding">
+            <div class="contact-box">
+                <i class="fab fa-whatsapp" style="font-size: 4rem; color: #10b981; margin-bottom: 20px;"></i>
+                <h2 style="margin-bottom: 20px; color: #0f172a;">Atendimento via WhatsApp</h2>
+                <p style="font-size: 1.1rem; color: #475569; max-width: 600px; margin: 0 auto 30px;">
+                    Nossa equipe técnica atende diretamente pelo WhatsApp para garantir um retorno rápido. Clique no botão abaixo para iniciar a conversa.
+                </p>
+                <a href="https://wa.me/5516991531963" target="_blank" class="btn-pricing" style="background-color: #10b981; font-size: 1.2rem; padding: 15px 40px; border-radius: 50px;">
+                    Chamar no WhatsApp Agora
+                </a>
+                
+                <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #e2e8f0;">
+                    <p style="color: #64748b; margin-bottom: 10px;">Ou envie um e-mail com a sua proposta:</p>
+                    <a href="mailto:comercial@dojoinsider.com.br" style="color: #0f172a; font-weight: bold; font-size: 1.2rem; text-decoration: none;">
+                        <i class="fas fa-envelope me-2"></i> comercial@dojoinsider.com.br
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <footer>
-        <p>Dojo Insider © 2026. Todos os direitos reservados. Soluções de Tecnologia para Artes Marciais.</p>
+        <p>Dojo Insider © 2026. Todos os direitos reservados. Soluções Inteligentes para Artes Marciais.</p>
     </footer>
+
+    <script>
+        function mudarPagina(idPagina) {
+            // 1. Esconde todas as páginas
+            const paginas = document.querySelectorAll('.page-view');
+            paginas.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // 2. Remove o destaque de todos os botões
+            const botoes = document.querySelectorAll('.nav-btn');
+            botoes.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // 3. Mostra a página solicitada
+            document.getElementById('page-' + idPagina).classList.add('active');
+
+            // 4. Destaca o botão correspondente no menu (se existir)
+            const tabBtn = document.getElementById('tab-' + idPagina);
+            if(tabBtn) {
+                tabBtn.classList.add('active');
+            }
+            
+            // 5. Rola suavemente para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>
